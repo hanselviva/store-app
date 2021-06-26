@@ -10,6 +10,7 @@ import {
 	Container,
 	Link,
 } from "@material-ui/core";
+import Store from "../Store/Store";
 
 //
 //
@@ -124,6 +125,8 @@ const Homepage = () => {
 				</Grid>
 				<Grid item xs={false} sm={4} md={7} className={classes.image} />
 			</Grid>
+
+			<Store />
 		</div>
 	);
 };
