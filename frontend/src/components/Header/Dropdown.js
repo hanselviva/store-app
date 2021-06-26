@@ -2,15 +2,18 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 //
-import Button from "@material-ui/core/Button";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import MenuIcon from "@material-ui/icons/Menu";
+import {
+	MenuList,
+	MenuItem,
+	Popper,
+	Paper,
+	Grow,
+	ClickAwayListener,
+	Button,
+} from "@material-ui/core";
+
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 	menuItem: {
 		color: theme.palette.primary.dark,
 		"&:hover": {
-			backgroundColor: theme.palette.primary.dark,
+			backgroundColor: theme.palette.primary.light,
 			color: theme.palette.primary.dark,
 		},
 	},
@@ -74,8 +77,7 @@ export default function Dropdown(props) {
 					onClick={handleToggle}
 					variant="outlined"
 				>
-					<ArrowDropDownIcon />
-					Menu
+					<MenuIcon />
 				</Button>
 				<Popper
 					open={open}
@@ -104,7 +106,7 @@ export default function Dropdown(props) {
 											component={Link}
 											to="/"
 										>
-											Option 1
+											About
 										</MenuItem>
 
 										<MenuItem
@@ -112,14 +114,15 @@ export default function Dropdown(props) {
 											component={Link}
 											to="/"
 										>
-											Option 2
+											Contact
 										</MenuItem>
 
 										<MenuItem
 											className={classes.menuItem}
-											onClick={handleLogout}
+											component={Link}
+											to="/"
 										>
-											Logout Option
+											View Code
 										</MenuItem>
 									</MenuList>
 								</ClickAwayListener>
