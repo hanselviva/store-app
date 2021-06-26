@@ -8,7 +8,6 @@ import AppBar from "@material-ui/core/AppBar";
 const useStyles = makeStyles((theme) => ({
 	footer: {
 		backgroundColor: theme.palette.background.paper,
-		padding: theme.spacing(2),
 	},
 	copyright: {
 		padding: theme.spacing(1),
