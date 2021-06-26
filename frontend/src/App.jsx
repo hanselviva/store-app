@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { connect } from "react-redux";
 //
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -24,4 +25,9 @@ function App() {
 	);
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading,
+	fetchError: state.fetchError,
+});
+
+export default connect(mapStateToProps, {})(App);

@@ -1,10 +1,10 @@
 import {
 	// ACTIONS
-    START_FETCHING,
+	START_FETCHING,
 	SIGNUP,
 	LOGIN,
 	FETCHING_USER_SUCCESS,
-    FETCH_ERROR,
+	FETCH_ERROR,
 	LOGOUT,
 } from "../actions";
 
@@ -12,6 +12,7 @@ export const initialState = {
 	isLoading: false,
 	isLoggedIn: false,
 	user: null,
+	fetchError: null,
 };
 
 export const reducer = (state = initialState, action) => {
