@@ -16,6 +16,9 @@ import Store from "../Store/Store";
 //
 
 const useStyles = makeStyles((theme) => ({
+	homepageWrapper: {
+		width: "50vw"
+	},
 	root: {
 		height: "80vh",
 	},

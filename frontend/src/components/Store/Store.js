@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		padding: theme.spacing(2),
-		backgroundColor: "#ffccbc",
+		// backgroundColor: "#ffccbc",
+		backgroundColor: "transparent",
+		borderRadius: "0px"
 	},
 	cardButton: {
 		color: theme.palette.secondary.dark,
@@ -70,7 +72,7 @@ const Store = () => {
 							md={4}
 							className={classes.cardWrapper}
 						>
-							<Card className={classes.card}>
+							<Card className={classes.card} variant="outlined">
 								<CardMedia
 									className={classes.cardMedia}
 									image={
@@ -101,6 +103,7 @@ const Store = () => {
 										className={classes.cardButton}
 										size="small"
 										variant="contained"
+										color="primary"
 									>
 										Rent this Game
 									</Button>
