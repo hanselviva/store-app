@@ -41,7 +41,7 @@ const Header = (props) => {
 	const classes = useStyles();
 
 	return (
-		<AppBar position="relative" className={classes.appBarWrapper}>
+		<AppBar position="sticky" className={classes.appBarWrapper}>
 			<Toolbar className={classes.toolBarWrapper}>
 				{/* Dropdown Menu */}
 				<Dropdown logout={props.logout} />

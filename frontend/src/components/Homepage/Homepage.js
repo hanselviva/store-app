@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import playingGames from "../../assets/playinggames.png";
+import playingGames from "../../assets/video-games.png";
 import Typed from "react-typed";
 import {
 	CssBaseline,
@@ -11,16 +11,14 @@ import {
 	Link,
 } from "@material-ui/core";
 import Store from "../Store/Store";
+import Banner from "./Banner";
 
 //
 //
 
 const useStyles = makeStyles((theme) => ({
-	homepageWrapper: {
-		width: "50vw"
-	},
 	root: {
-		height: "80vh",
+		height: "70vh",
 	},
 	image: {
 		backgroundImage: `url(${playingGames})`,
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 			theme.palette.type === "light"
 				? theme.palette.grey[50]
 				: theme.palette.grey[900],
-		backgroundSize: "cover",
+		backgroundSize: "contain",
 		backgroundPosition: "center",
 	},
 	//
@@ -70,21 +68,27 @@ const Homepage = () => {
 						<Container maxWidth="sm">
 							<Typography
 								component="h2"
-								variant="h2"
+								variant="h1"
 								align="center"
-								color="textPrimary"
+								color="primary"
 								gutterBottom
 							>
 								<Typed
-									style={{ color: "#c41c00e" }}
 									strings={["PUT", "FIND"]}
 									typeSpeed={80}
 									backSpeed={80}
 									loop
 								/>
-								<br />
+							</Typography>
+							<Typography
+								component="h2"
+								variant="h2"
+								align="center"
+								gutterBottom
+							>
 								GAMES FOR RENT!
 							</Typography>
+
 							<Typography
 								variant="h5"
 								align="center"
@@ -128,7 +132,7 @@ const Homepage = () => {
 				</Grid>
 				<Grid item xs={false} sm={4} md={7} className={classes.image} />
 			</Grid>
-
+			<Banner />
 			<Store />
 		</div>
 	);
