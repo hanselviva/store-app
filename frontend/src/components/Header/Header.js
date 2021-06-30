@@ -5,6 +5,7 @@ import Dropdown from "./Dropdown";
 
 // MUI imports
 import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
 import {
 	Button,
@@ -52,6 +53,10 @@ const Header = (props) => {
 						RENT A GAME
 					</Typography>
 				</Container>
+
+				<div>
+					<ShoppingCartIcon fontSize="large" />
+				</div>
 
 				<Button className={classes.button} variant="contained">
 					Signup
