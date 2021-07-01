@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removeFromCart } from "../../actions";
+import { useHistory } from "react-router-dom";
 
 //
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	tableContainer: { maxWidth: "80vw" },
+	tableContainer: {
+		maxWidth: "80vw",
+		marginTop: theme.spacing(10),
+		marginBottom: theme.spacing(10),
+	},
 	gameTitleCol: {
 		display: "flex",
 		flexDirection: "row",
@@ -30,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Cart = (props) => {
 	const { cart, removeFromCart } = props;
+	const history = useHistory();
 
 	const total = cart.reduce(
 		(accumulator, curr) => accumulator + parseFloat(curr.cheapest),
@@ -59,7 +65,7 @@ const Cart = (props) => {
 											alt={item.external}
 											src={item.thumb}
 											style={{ marginRight: "10px" }}
-										/>{" "}
+										/>
 										{item.external}
 									</TableCell>
 
@@ -85,6 +91,17 @@ const Cart = (props) => {
 						</TableBody>
 					</Table>
 				</TableContainer>
+
+				<Button
+					size="large"
+					variant="contained"
+					color="secondary"
+					onClick={() => {
+						history.push("/login");
+					}}
+				>
+					PROCEED TO CHECKOUT
+				</Button>
 			</div>
 		</React.Fragment>
 	);
