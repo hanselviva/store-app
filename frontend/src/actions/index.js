@@ -10,6 +10,7 @@ export const LOGOUT = "LOGOUT";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ITEMS_FETCHED = "ITEMS_FETCHED";
+export const REMOVE_FROM_CART = "REMOVE_FROM CART";
 
 export const fetchItems = () => (dispatch) => {
 	dispatch({
@@ -121,6 +122,13 @@ export const getUser = (id) => (dispatch) => {
 export const addToCart = (item) => (dispatch) => {
 	dispatch({
 		type: ADD_TO_CART,
+		payload: item,
+	});
+};
+
+export const removeFromCart = (item) => (dispatch) => {
+	dispatch({
+		type: REMOVE_FROM_CART,
 		payload: item,
 	});
 };

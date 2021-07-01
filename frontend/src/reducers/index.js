@@ -5,6 +5,7 @@ import {
 	LOGIN,
 	FETCHING_USER_SUCCESS,
 	ADD_TO_CART,
+	REMOVE_FROM_CART,
 	FETCH_ERROR,
 	LOGOUT,
 	ITEMS_FETCHED,
@@ -55,6 +56,15 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				cart: [...state.cart, action.payload],
+			};
+		case REMOVE_FROM_CART:
+			return {
+				...state,
+				cart:
+					// ...state.cart.slice(0, action.payload),
+					// ...state.items.slice(action.payload + 1),
+					//  OR:
+					state.cart.filter((item) => item !== action.payload),
 			};
 		case FETCH_ERROR:
 			return {

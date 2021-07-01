@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../../actions";
-import axios from "axios";
+import { addToCart, removeFromCart } from "../../actions";
 import { useHistory, useParams } from "react-router-dom";
 
 import {
@@ -42,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 			color: "white",
 		},
 	},
+	cardButtonRemove: {
+		backgroundColor: "red",
+	},
 	cardMedia: {
 		paddingTop: "56.25%", // 16:9
 	},
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 // MUI variable
 
 const Store = (props) => {
-	const { items } = props;
+	const { items, cart, addToCart, removeFromCart } = props;
 
 	const classes = useStyles();
 	const id = useParams();
@@ -67,13 +69,6 @@ const Store = (props) => {
 
 	const viewDetails = (id) => {
 		history.push(`/store/:${id}`);
-	};
-
-	const handleAddToCart = (e) => {
-		e.preventDefault();
-		//
-		const itemsStr = localStorage.getItem("items");
-		const itemsArr = JSON.parse(itemsStr);
 	};
 
 	return (
@@ -109,14 +104,32 @@ const Store = (props) => {
 									>
 										View
 									</Button>
-									<Button
-										className={classes.cardButton}
-										size="small"
-										variant="contained"
-										color="secondary"
-									>
-										Rent this Game
-									</Button>
+
+									{cart.includes(card) ? (
+										<Button
+											className={classes.cardButtonRemove}
+											size="small"
+											variant="contained"
+											color="secondary"
+											onClick={() => {
+												removeFromCart(card);
+											}}
+										>
+											Remove from Cart
+										</Button>
+									) : (
+										<Button
+											className={classes.cardButton}
+											size="small"
+											variant="contained"
+											color="secondary"
+											onClick={() => {
+												addToCart(card);
+											}}
+										>
+											Rent this Game
+										</Button>
+									)}
 								</CardActions>
 							</Card>
 						</Grid>
@@ -134,4 +147,4 @@ const mapStateToProps = (state) => ({
 	cart: state.cart,
 });
 
-export default connect(mapStateToProps, { addToCart })(Store);
+export default connect(mapStateToProps, { addToCart, removeFromCart })(Store);
