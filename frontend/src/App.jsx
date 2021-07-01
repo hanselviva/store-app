@@ -10,6 +10,7 @@ import Login from "./components/Login/Login";
 import Store from "./components/Store/Store";
 import Cart from "./components/Cart/Cart";
 import SignUp from "./components/Signup/Signup";
+import GameDetails from "./components/GameDetails/GameDetails";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					<Route path="/signup" component={SignUp} />
 					<Route path="/store" component={Store} />
 					<Route path="/cart" component={Cart} />
+					<Route path="/store/:id" component={GameDetails} />
 				</Switch>
 			</div>
 			<Footer />

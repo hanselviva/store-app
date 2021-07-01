@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../../actions";
 import axios from "axios";
+import { useHistory, useParams } from "react-router-dom";
 
 import {
 	Button,
@@ -51,17 +54,39 @@ const useStyles = makeStyles((theme) => ({
 const Store = () => {
 	const [items, setItems] = useState([]);
 	const classes = useStyles();
+	const game = useParams();
+	const history = useHistory();
 
 	useEffect(() => {
 		axios
 			.get(
-				"https://www.cheapshark.com/api/1.0/games?title=game&limit=30&exact=0",
+				"https://www.cheapshark.com/api/1.0/games?title=Game&limit=50&exact=0",
 			)
 			.then((res) => {
 				setItems(res.data);
+				localStorage.setItem("items", JSON.stringify(res.data));
 			})
 			.catch((err) => console.log(err));
 	}, []);
+
+	// const getItem = (e) => {
+	// 	e.preventDefault();
+	// 	const arr = localStorage.getItem("items");
+	// 	const newArr = JSON.parse(arr);
+	// 	console.log(newArr);
+	// };
+
+	const viewDetails = (e) => {
+		e.preventDefault();
+		history.push(`/store${game}`);
+	};
+
+	const handleAddToCart = (e) => {
+		e.preventDefault();
+		//
+		const itemsStr = localStorage.getItem("items");
+		const itemsArr = JSON.parse(itemsStr);
+	};
 
 	return (
 		<div className="storeWrapper">
@@ -90,6 +115,7 @@ const Store = () => {
 										className={classes.cardButton}
 										size="small"
 										variant="outlined"
+										onClick={viewDetails}
 									>
 										View
 									</Button>
@@ -111,4 +137,11 @@ const Store = () => {
 	);
 };
 
-export default Store;
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading,
+	fetchError: state.fetchError,
+	items: state.items,
+	cart: state.cart,
+});
+
+export default connect(mapStateToProps, { addToCart })(Store);

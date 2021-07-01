@@ -62,7 +62,7 @@ const Header = (props) => {
 					</Typography>
 				</Container>
 
-				<Badge badgeContent={2} color="secondary">
+				<Badge badgeContent={props.cart.length} color="secondary">
 					<ShoppingCartIcon fontSize="large" />
 				</Badge>
 
@@ -89,9 +89,10 @@ const Header = (props) => {
 	);
 };
 
-export default connect(
-	() => {
-		return {};
-	},
-	{ logout },
-)(Header);
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading,
+	fetchError: state.fetchError,
+	cart: state.cart,
+});
+
+export default connect(mapStateToProps, { logout })(Header);

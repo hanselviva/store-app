@@ -81,24 +81,31 @@ export const getUser = (id) => (dispatch) => {
 		});
 };
 
-export const addToCart = () => (dispatch) => {
+// export const addToCart = () => (dispatch) => {
+// 	dispatch({
+// 		type: START_FETCHING,
+// 	});
+// 	axiosWithAuth()
+// 		.put(`https://reqres.in/api/users`)
+// 		.then((response) => {
+// 			dispatch({
+// 				type: ADD_TO_CART,
+// 				payload: response.data,
+// 			}).catch((error) => {
+// 				console.log(error);
+// 				dispatch({
+// 					type: FETCH_ERROR,
+// 					payload: error.response.data.error,
+// 				});
+// 			});
+// 		});
+// };
+
+export const addToCart = (obj) => (dispatch) => {
 	dispatch({
-		type: START_FETCHING,
+		type: ADD_TO_CART,
+		payload: obj,
 	});
-	axiosWithAuth()
-		.put(`https://reqres.in/api/users`)
-		.then((response) => {
-			dispatch({
-				type: ADD_TO_CART,
-				payload: response.data,
-			}).catch((error) => {
-				console.log(error);
-				dispatch({
-					type: FETCH_ERROR,
-					payload: error.response.data.error,
-				});
-			});
-		});
 };
 
 export const logout = () => (dispatch) => {

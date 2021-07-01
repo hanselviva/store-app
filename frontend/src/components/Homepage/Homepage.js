@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Homepage = () => {
 	const classes = useStyles();
+
 	return (
 		<div className="homepageWrapper">
 			<CssBaseline />
