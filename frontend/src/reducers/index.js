@@ -7,9 +7,11 @@ import {
 	ADD_TO_CART,
 	FETCH_ERROR,
 	LOGOUT,
+	ITEMS_FETCHED,
 } from "../actions";
 
 export const initialState = {
+	items: [],
 	isLoading: false,
 	isLoggedIn: false,
 	user: null,
@@ -23,6 +25,11 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: true,
+			};
+		case ITEMS_FETCHED:
+			return {
+				...state,
+				items: action.payload,
 			};
 		case LOGIN:
 			return {

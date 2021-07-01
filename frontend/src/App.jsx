@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { connect } from "react-redux";
+import { fetchItems } from "./actions";
 //
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -12,7 +13,13 @@ import Cart from "./components/Cart/Cart";
 import SignUp from "./components/Signup/Signup";
 import GameDetails from "./components/GameDetails/GameDetails";
 
-function App() {
+const App = (props) => {
+	const { fetchItems } = props;
+
+	useEffect(() => {
+		fetchItems();
+	}, []);
+
 	return (
 		<div className="App">
 			<Header />
@@ -21,7 +28,7 @@ function App() {
 					<Route exact path="/" component={Homepage} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={SignUp} />
-					<Route path="/store" component={Store} />
+					<Route exact path="/store" component={Store} />
 					<Route path="/cart" component={Cart} />
 					<Route path="/store/:id" component={GameDetails} />
 				</Switch>
@@ -29,11 +36,13 @@ function App() {
 			<Footer />
 		</div>
 	);
-}
+};
 
 const mapStateToProps = (state) => ({
 	isLoading: state.isLoading,
 	fetchError: state.fetchError,
+	items: state.items,
+	cart: state.cart,
 });
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, { fetchItems })(App);

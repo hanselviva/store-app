@@ -51,23 +51,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 // MUI variable
 
-const Store = () => {
-	const [items, setItems] = useState([]);
-	const classes = useStyles();
-	const game = useParams();
-	const history = useHistory();
+const Store = (props) => {
+	const { items } = props;
 
-	useEffect(() => {
-		axios
-			.get(
-				"https://www.cheapshark.com/api/1.0/games?title=Game&limit=50&exact=0",
-			)
-			.then((res) => {
-				setItems(res.data);
-				localStorage.setItem("items", JSON.stringify(res.data));
-			})
-			.catch((err) => console.log(err));
-	}, []);
+	const classes = useStyles();
+	const id = useParams();
+	const history = useHistory();
 
 	// const getItem = (e) => {
 	// 	e.preventDefault();
@@ -76,9 +65,8 @@ const Store = () => {
 	// 	console.log(newArr);
 	// };
 
-	const viewDetails = (e) => {
-		e.preventDefault();
-		history.push(`/store${game}`);
+	const viewDetails = (id) => {
+		history.push(`/store/:${id}`);
 	};
 
 	const handleAddToCart = (e) => {
@@ -92,8 +80,8 @@ const Store = () => {
 		<div className="storeWrapper">
 			<Container className={classes.cardGrid} maxWidth="lg">
 				<Grid container spacing={4}>
-					{items.map((card, index) => (
-						<Grid item key={index} md={3} className={classes.cardWrapper}>
+					{items.map((card) => (
+						<Grid item key={card.gameID} md={3} className={classes.cardWrapper}>
 							<Card className={classes.card} variant="outlined">
 								<CardMedia
 									className={classes.cardMedia}
@@ -115,7 +103,9 @@ const Store = () => {
 										className={classes.cardButton}
 										size="small"
 										variant="outlined"
-										onClick={viewDetails}
+										onClick={() => {
+											viewDetails(card.gameID);
+										}}
 									>
 										View
 									</Button>

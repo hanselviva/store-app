@@ -1,4 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from "axios";
 
 export const START_FETCHING = "START_FETCHING";
 export const SIGNUP = "SIGNUP";
@@ -8,6 +9,22 @@ export const FETCH_ERROR = "FETCH_ERROR";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const ITEMS_FETCHED = "ITEMS_FETCHED";
+
+export const fetchItems = () => (dispatch) => {
+	dispatch({
+		type: START_FETCHING,
+	});
+	axios
+		.get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=50&exact=0")
+		.then((res) =>
+			dispatch({
+				type: ITEMS_FETCHED,
+				payload: res.data,
+			}),
+		)
+		.catch((err) => console.log(err));
+};
 
 export const signup = (signupCredentials) => (dispatch) => {
 	console.log("signup credentials", signupCredentials);
@@ -101,10 +118,10 @@ export const getUser = (id) => (dispatch) => {
 // 		});
 // };
 
-export const addToCart = (obj) => (dispatch) => {
+export const addToCart = (item) => (dispatch) => {
 	dispatch({
 		type: ADD_TO_CART,
-		payload: obj,
+		payload: item,
 	});
 };
 
