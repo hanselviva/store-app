@@ -63,8 +63,14 @@ const Header = (props) => {
 					</Typography>
 				</Container>
 
-				<Badge badgeContent={props.cart.length} color="secondary">
-					<ShoppingCartIcon fontSize="large" />
+				<Badge
+					badgeContent={props.cart.length}
+					color="secondary"
+					onClick={() => {
+						history.push("/cart");
+					}}
+				>
+					<ShoppingCartIcon fontSize="large" style={{ cursor: "pointer" }} />
 				</Badge>
 
 				<Button

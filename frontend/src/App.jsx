@@ -46,3 +46,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { fetchItems })(App);
+
+// ? note to self: Can add renter options by making localStorage of the items and running CRUD operations in it
+// ? such as create a new game, edit, delete a new game

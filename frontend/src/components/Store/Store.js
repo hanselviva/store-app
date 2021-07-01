@@ -35,14 +35,14 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: "0px",
 		border: "1px solid #ffccbc",
 	},
-	cardButton: {
-		"&:hover": {
-			backgroundColor: "#ff5722",
-			color: "white",
-		},
-	},
+	cardButton: {},
 	cardButtonRemove: {
-		backgroundColor: "red",
+		backgroundColor: "#ff6f60",
+		color: "white",
+		"&:hover": {
+			backgroundColor: "#ff6f60",
+			color: "black",
+		},
 	},
 	cardMedia: {
 		paddingTop: "56.25%", // 16:9
@@ -73,6 +73,11 @@ const Store = (props) => {
 
 	const viewDetails = (id) => {
 		history.push(`/store/:${id}`);
+	};
+
+	const handleAddToCart = (game) => {
+		addToCart(game);
+		localStorage.setItem("cart", JSON.stringify(cart));
 	};
 
 	return (
