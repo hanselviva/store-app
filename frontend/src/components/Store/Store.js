@@ -67,6 +67,10 @@ const Store = (props) => {
 	// 	console.log(newArr);
 	// };
 
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart]);
+
 	const viewDetails = (id) => {
 		history.push(`/store/:${id}`);
 	};

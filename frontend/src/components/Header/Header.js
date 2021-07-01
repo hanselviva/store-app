@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		justifyContent: "flex-end",
 		alignItems: "center",
+		cursor: "pointer",
 	},
 	icon: {
 		marginRight: theme.spacing(2),
