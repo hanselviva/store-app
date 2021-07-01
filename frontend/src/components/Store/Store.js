@@ -30,10 +30,9 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		// backgroundColor: "#ffccbc",
 		backgroundColor: "transparent",
-		borderRadius: "0px"
+		borderRadius: "0px",
 	},
 	cardButton: {
-		color: theme.palette.secondary.dark,
 		"&:hover": {
 			backgroundColor: "#ff5722",
 			color: "white",
@@ -103,7 +102,7 @@ const Store = () => {
 										className={classes.cardButton}
 										size="small"
 										variant="contained"
-										color="primary"
+										color="secondary"
 									>
 										Rent this Game
 									</Button>

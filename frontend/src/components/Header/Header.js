@@ -13,6 +13,7 @@ import {
 	Typography,
 	Toolbar,
 	Container,
+	Badge,
 } from "@material-ui/core";
 //
 
@@ -54,9 +55,9 @@ const Header = (props) => {
 					</Typography>
 				</Container>
 
-				<div>
+				<Badge badgeContent={2} color="secondary">
 					<ShoppingCartIcon fontSize="large" />
-				</div>
+				</Badge>
 
 				<Button className={classes.button} variant="contained">
 					Signup

@@ -4,6 +4,7 @@ import {
 	SIGNUP,
 	LOGIN,
 	FETCHING_USER_SUCCESS,
+	ADD_TO_CART,
 	FETCH_ERROR,
 	LOGOUT,
 } from "../actions";
@@ -13,6 +14,7 @@ export const initialState = {
 	isLoggedIn: false,
 	user: null,
 	fetchError: null,
+	cart: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -41,6 +43,11 @@ export const reducer = (state = initialState, action) => {
 				user: action.payload,
 				fetchError: null,
 				isLoading: false,
+			};
+		case ADD_TO_CART:
+			return {
+				...state,
+				cart: [...state.cart, action.payload],
 			};
 		case FETCH_ERROR:
 			return {

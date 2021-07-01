@@ -7,7 +7,7 @@ export const FETCHING_USER_SUCCESS = "FETCHING_USER_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERROR = "CLEAR_ERROR";
-
+export const ADD_TO_CART = "ADD_TO_CART";
 
 export const signup = (signupCredentials) => (dispatch) => {
 	console.log("signup credentials", signupCredentials);
@@ -33,7 +33,6 @@ export const signup = (signupCredentials) => (dispatch) => {
 			dispatch({
 				type: FETCH_ERROR,
 				payload: error.response.data.error,
-				
 			});
 		});
 };
@@ -78,6 +77,26 @@ export const getUser = (id) => (dispatch) => {
 			dispatch({
 				type: FETCH_ERROR,
 				payload: error.response.data.error,
+			});
+		});
+};
+
+export const addToCart = () => (dispatch) => {
+	dispatch({
+		type: START_FETCHING,
+	});
+	axiosWithAuth()
+		.put(`https://reqres.in/api/users`)
+		.then((response) => {
+			dispatch({
+				type: ADD_TO_CART,
+				payload: response.data,
+			}).catch((error) => {
+				console.log(error);
+				dispatch({
+					type: FETCH_ERROR,
+					payload: error.response.data.error,
+				});
 			});
 		});
 };
