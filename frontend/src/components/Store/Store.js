@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 		// backgroundColor: "#ffccbc",
 		backgroundColor: "transparent",
 		borderRadius: "0px",
+		border: "1px solid #ffccbc",
 	},
 	cardButton: {
 		"&:hover": {
@@ -53,8 +54,12 @@ const Store = () => {
 
 	useEffect(() => {
 		axios
-			.get("https://picsum.photos/v2/list")
-			.then((res) => setItems(res.data))
+			.get(
+				"https://www.cheapshark.com/api/1.0/games?title=game&limit=30&exact=0",
+			)
+			.then((res) => {
+				setItems(res.data);
+			})
 			.catch((err) => console.log(err));
 	}, []);
 
@@ -63,32 +68,22 @@ const Store = () => {
 			<Container className={classes.cardGrid} maxWidth="lg">
 				<Grid container spacing={4}>
 					{items.map((card, index) => (
-						<Grid
-							item
-							key={index}
-							xs={12}
-							sm={6}
-							md={4}
-							className={classes.cardWrapper}
-						>
+						<Grid item key={index} md={3} className={classes.cardWrapper}>
 							<Card className={classes.card} variant="outlined">
 								<CardMedia
 									className={classes.cardMedia}
 									image={
-										card.image
-											? card.image
+										card.thumb
+											? card.thumb
 											: "https://cdn.pixabay.com/photo/2017/08/28/16/17/super-mario-2690254_960_720.jpg"
 									}
-									title={"Video Game Title"}
+									title=""
 								/>
 								<CardContent className={classes.cardContent}>
 									<Typography gutterBottom variant="h5" component="h2">
-										{card.name ? card.name : "Video Game Title"} <br />
+										{card.external} <br />
 									</Typography>
-									<Typography>
-										Description:
-										{card.description ? card.description : "Game summary"}
-									</Typography>
+									<Typography>Price to rent: ${card.cheapest}</Typography>
 								</CardContent>
 								<CardActions>
 									<Button

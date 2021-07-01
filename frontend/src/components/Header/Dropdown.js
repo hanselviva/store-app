@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dropdown(props) {
 	const classes = useStyles();
-
-	const history = useHistory();
-	const handleLogout = (event) => {
-		event.preventDefault();
-	};
 
 	//=========== MUI STYLING STARTS HERE
 	const [open, setOpen] = React.useState(false);

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions";
 import Dropdown from "./Dropdown";
+import { useHistory } from "react-router-dom";
 
 // MUI imports
 import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
 	const classes = useStyles();
+	const history = useHistory();
 
 	return (
 		<AppBar position="sticky" className={classes.appBarWrapper}>
@@ -48,7 +50,12 @@ const Header = (props) => {
 				{/* Dropdown Menu */}
 				<Dropdown logout={props.logout} />
 
-				<Container className={classes.logoWrapper}>
+				<Container
+					className={classes.logoWrapper}
+					onClick={() => {
+						return history.push("/");
+					}}
+				>
 					<VideogameAssetIcon className={classes.icon} />
 					<Typography variant="h6" color="inherit" noWrap>
 						RENT A GAME
@@ -59,10 +66,22 @@ const Header = (props) => {
 					<ShoppingCartIcon fontSize="large" />
 				</Badge>
 
-				<Button className={classes.button} variant="contained">
+				<Button
+					className={classes.button}
+					variant="contained"
+					onClick={() => {
+						return history.push("/signup");
+					}}
+				>
 					Signup
 				</Button>
-				<Button className={classes.button} variant="contained">
+				<Button
+					className={classes.button}
+					variant="contained"
+					onClick={() => {
+						return history.push("/login");
+					}}
+				>
 					Login
 				</Button>
 			</Toolbar>

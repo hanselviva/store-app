@@ -9,6 +9,7 @@ import Homepage from "./components/Homepage/Homepage";
 import Login from "./components/Login/Login";
 import Store from "./components/Store/Store";
 import Cart from "./components/Cart/Cart";
+import SignUp from "./components/Signup/Signup";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={Homepage} />
 					<Route path="/login" component={Login} />
+					<Route path="/signup" component={SignUp} />
 					<Route path="/store" component={Store} />
 					<Route path="/cart" component={Cart} />
 				</Switch>
