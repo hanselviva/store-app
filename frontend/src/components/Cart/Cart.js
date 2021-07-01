@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: "center",
 	},
 	tableContainer: { maxWidth: "80vw" },
+	gameTitleCol: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+	},
 }));
 
 const Cart = (props) => {
@@ -49,7 +54,14 @@ const Cart = (props) => {
 							{cart.map((item) => (
 								<TableRow key={item.gameID}>
 									<TableCell>{item.gameID}</TableCell>
-									<TableCell>{item.external}</TableCell>
+									<TableCell className={classes.gameTitleCol}>
+										<img
+											alt={item.external}
+											src={item.thumb}
+											style={{ marginRight: "10px" }}
+										/>{" "}
+										{item.external}
+									</TableCell>
 
 									<TableCell align="right">${item.cheapest}</TableCell>
 									<TableCell align="right">
