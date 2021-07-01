@@ -58,7 +58,7 @@ const Header = (props) => {
 				>
 					<VideogameAssetIcon className={classes.icon} />
 					<Typography variant="h6" color="inherit" noWrap>
-						RENT A GAME
+						RENT-A-GAME
 					</Typography>
 				</Container>
 

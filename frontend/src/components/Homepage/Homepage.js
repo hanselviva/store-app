@@ -69,13 +69,21 @@ const Homepage = () => {
 						<Container maxWidth="sm">
 							<Typography
 								component="h2"
+								variant="h2"
+								align="center"
+								gutterBottom
+							>
+								SAVE
+							</Typography>
+							<Typography
+								component="h1"
 								variant="h1"
 								align="center"
 								color="primary"
 								gutterBottom
 							>
 								<Typed
-									strings={["PUT", "FIND"]}
+									strings={["MONEY ", "GAMES ", "TIME "]}
 									typeSpeed={80}
 									backSpeed={80}
 									loop
@@ -87,7 +95,7 @@ const Homepage = () => {
 								align="center"
 								gutterBottom
 							>
-								GAMES FOR RENT!
+								RENT A GAME!
 							</Typography>
 
 							<Typography
@@ -97,10 +105,11 @@ const Homepage = () => {
 								color="textSecondary"
 								paragraph
 							>
-								Don't want to spend a lot of $$ on video games? <br />
-								Or you want to make $$ out of the games collecting dust on your
-								shelf? <br />
-								You've come to the right place!
+								{/* Or you want to make $$ out of the games collecting dust on your
+								shelf? <br /> */}
+								Don't want to spend a lot of $$ on overpriced video games?
+								You've come to the right place! Rent-A-Game will deliver the
+								games to your front door!
 							</Typography>
 							<div className={classes.ctaButtonsWrapper}>
 								<Grid container spacing={2} justify="center">
@@ -115,7 +124,7 @@ const Homepage = () => {
 											</Button>
 										</Link>
 									</Grid>
-									<Grid item>
+									{/* <Grid item>
 										<Link href="/" style={{ textDecoration: "none" }}>
 											<Button
 												variant="contained"
@@ -125,7 +134,7 @@ const Homepage = () => {
 												Put Games for Rent
 											</Button>
 										</Link>
-									</Grid>
+									</Grid> */}
 								</Grid>
 							</div>
 						</Container>
