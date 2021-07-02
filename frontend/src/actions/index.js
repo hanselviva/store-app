@@ -17,7 +17,7 @@ export const fetchItems = () => (dispatch) => {
 		type: START_FETCHING,
 	});
 	axios
-		.get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=50&exact=0")
+		.get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=90&exact=0")
 		.then((res) =>
 			dispatch({
 				type: ITEMS_FETCHED,

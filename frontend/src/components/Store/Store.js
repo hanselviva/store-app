@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import {
 	Button,
@@ -54,18 +54,10 @@ const useStyles = makeStyles((theme) => ({
 // MUI variable
 
 const Store = (props) => {
-	const { items, cart, addToCart, removeFromCart } = props;
+	const { cart, addToCart, removeFromCart, items } = props;
 
 	const classes = useStyles();
-	const id = useParams();
 	const history = useHistory();
-
-	// const getItem = (e) => {
-	// 	e.preventDefault();
-	// 	const arr = localStorage.getItem("items");
-	// 	const newArr = JSON.parse(arr);
-	// 	console.log(newArr);
-	// };
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
@@ -73,11 +65,6 @@ const Store = (props) => {
 
 	const viewDetails = (id) => {
 		history.push(`/store/:${id}`);
-	};
-
-	const handleAddToCart = (game) => {
-		addToCart(game);
-		localStorage.setItem("cart", JSON.stringify(cart));
 	};
 
 	return (
@@ -152,8 +139,8 @@ const Store = (props) => {
 const mapStateToProps = (state) => ({
 	isLoading: state.isLoading,
 	fetchError: state.fetchError,
-	items: state.items,
 	cart: state.cart,
+	items: state.items,
 });
 
 export default connect(mapStateToProps, { addToCart, removeFromCart })(Store);

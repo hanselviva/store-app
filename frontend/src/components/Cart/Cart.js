@@ -38,7 +38,7 @@ const Cart = (props) => {
 	const history = useHistory();
 
 	const total = cart.reduce(
-		(accumulator, curr) => accumulator + parseFloat(curr.cheapest),
+		(accumulator, curr) => parseFloat(accumulator) + parseFloat(curr.cheapest),
 		0,
 	);
 
@@ -64,6 +64,7 @@ const Cart = (props) => {
 										<img
 											alt={item.external}
 											src={item.thumb}
+											width="100px"
 											style={{ marginRight: "10px" }}
 										/>
 										{item.external}

@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(2),
 	},
 	button: {
+		backgroundColor: theme.palette.primary.light,
 		margin: theme.spacing(2),
 	},
 }));

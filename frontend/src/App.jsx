@@ -18,6 +18,7 @@ const App = (props) => {
 
 	useEffect(() => {
 		fetchItems();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

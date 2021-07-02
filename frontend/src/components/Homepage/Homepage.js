@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import playingGames from "../../assets/video-games.png";
 import Typed from "react-typed";
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Homepage = () => {
+const Homepage = (props) => {
 	const classes = useStyles();
 
 	return (
@@ -143,9 +145,18 @@ const Homepage = () => {
 				<Grid item xs={false} sm={4} md={7} className={classes.image} />
 			</Grid>
 			<Banner />
-			<Store />
+			<Store
+			// items={currentItems}
+			// itemsPerPage={itemsPerPage}
+			// totalItems={items.length}
+			/>
 		</div>
 	);
 };
 
-export default Homepage;
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading,
+	fetchError: state.fetchError,
+});
+
+export default connect(mapStateToProps, {})(Homepage);

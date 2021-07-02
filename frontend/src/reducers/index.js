@@ -30,6 +30,7 @@ export const reducer = (state = initialState, action) => {
 		case ITEMS_FETCHED:
 			return {
 				...state,
+				isLoading: false,
 				items: action.payload,
 			};
 		case LOGIN:

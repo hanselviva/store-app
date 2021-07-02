@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 const GameDetails = (props) => {
-	const { items } = props;
+	// const { items } = props;
 
 	return (
 		<div className="gameWrapper">
