@@ -50,12 +50,15 @@ const useStyles = makeStyles((theme) => ({
 	cardContent: {
 		flexGrow: 1,
 	},
+	typography: {
+		padding: theme.spacing(2),
+	},
 }));
+
 // MUI variable
 
 const Store = (props) => {
 	const { cart, addToCart, removeFromCart, items } = props;
-
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -72,31 +75,37 @@ const Store = (props) => {
 			<Container className={classes.cardGrid} maxWidth="lg">
 				<Grid container spacing={4}>
 					{items.map((card) => (
-						<Grid item key={card.gameID} md={3} className={classes.cardWrapper}>
+						<Grid item key={card.id} md={3} className={classes.cardWrapper}>
 							<Card className={classes.card} variant="outlined">
 								<CardMedia
 									className={classes.cardMedia}
 									image={
-										card.thumb
-											? card.thumb
+										card.thumbnail
+											? card.thumbnail
 											: "https://cdn.pixabay.com/photo/2017/08/28/16/17/super-mario-2690254_960_720.jpg"
 									}
 									title=""
 								/>
 								<CardContent className={classes.cardContent}>
 									<Typography gutterBottom variant="h5" component="h2">
-										{card.external} <br />
+										{card.title} <br />
 									</Typography>
-									<Typography>Price to rent: ${card.cheapest}</Typography>
+									<Typography>
+										<b>
+											Price to Rent: $
+											{Math.floor(Math.random() * (60 - 20 + 1)) + 20}
+										</b>
+										<br />
+										<b>Genre:</b> {card.genre} <br />
+										<b>Platform: </b> {card.platform} <br />
+										<b>Description:</b> {card.short_description}
+									</Typography>
 								</CardContent>
 								<CardActions>
 									<Button
 										className={classes.cardButton}
 										size="small"
 										variant="outlined"
-										onClick={() => {
-											viewDetails(card.gameID);
-										}}
 									>
 										View
 									</Button>

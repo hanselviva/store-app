@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { removeFromCart } from "../../actions";
 import { useHistory } from "react-router-dom";
@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: "center",
 	},
 	tableContainer: {
-		maxWidth: "80vw",
+		width: "60vw",
 		marginTop: theme.spacing(10),
 		marginBottom: theme.spacing(10),
 	},
 	textContent: {
-		minHeight: "30vh",
-		minWidth: "70vw",
+		height: "30vh",
+		width: "60vw",
 		margin: "10vh",
 		display: "flex",
 		flexDirection: "column",
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Cart = (props) => {
 	const { cart, removeFromCart } = props;
+	const classes = useStyles();
 	const history = useHistory();
 
 	const total = cart.reduce(
@@ -51,7 +52,6 @@ const Cart = (props) => {
 		0,
 	);
 
-	const classes = useStyles();
 	return (
 		<div className={classes.cartWrapper}>
 			{cart.length === 0 ? (
