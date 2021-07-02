@@ -26,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(10),
 		marginBottom: theme.spacing(10),
 	},
+	textContent: {
+		minHeight: "30vh",
+		minWidth: "70vw",
+		margin: "10vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	gameTitleCol: {
 		display: "flex",
 		flexDirection: "row",
@@ -44,67 +53,85 @@ const Cart = (props) => {
 
 	const classes = useStyles();
 	return (
-		<React.Fragment>
-			<div className={classes.cartWrapper}>
-				<TableContainer component={Paper} className={classes.tableContainer}>
-					<Table size="medium">
-						<TableHead>
-							<TableRow>
-								<TableCell>Item Number</TableCell>
-								<TableCell>Title</TableCell>
+		<div className={classes.cartWrapper}>
+			{cart.length === 0 ? (
+				<Paper className={classes.textContent}>
+					<h3>
+						You currently have no items in your cart. Browse games and add items
+						to cart.
+					</h3>
+					<Button
+						variant="contained"
+						color="secondary"
+						onClick={() => {
+							history.push("/store");
+						}}
+						style={{ width: "20vw" }}
+					>
+						Find Games to Rent
+					</Button>
+				</Paper>
+			) : (
+				<div>
+					<TableContainer component={Paper} className={classes.tableContainer}>
+						<Table size="medium">
+							<TableHead>
+								<TableRow>
+									<TableCell>Item Number</TableCell>
+									<TableCell>Title</TableCell>
 
-								<TableCell align="right">Rent Price</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{cart.map((item) => (
-								<TableRow key={item.gameID}>
-									<TableCell>{item.gameID}</TableCell>
-									<TableCell className={classes.gameTitleCol}>
-										<img
-											alt={item.external}
-											src={item.thumb}
-											width="100px"
-											style={{ marginRight: "10px" }}
-										/>
-										{item.external}
-									</TableCell>
+									<TableCell align="right">Rent Price</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{cart.map((item) => (
+									<TableRow key={item.gameID}>
+										<TableCell>{item.gameID}</TableCell>
+										<TableCell className={classes.gameTitleCol}>
+											<img
+												alt={item.external}
+												src={item.thumb}
+												width="100px"
+												style={{ marginRight: "10px" }}
+											/>
+											{item.external}
+										</TableCell>
 
-									<TableCell align="right">${item.cheapest}</TableCell>
-									<TableCell align="right">
-										<Button
-											size="small"
-											variant="outlined"
-											onClick={() => {
-												removeFromCart(item);
-											}}
-										>
-											Remove
-										</Button>
+										<TableCell align="right">${item.cheapest}</TableCell>
+										<TableCell align="right">
+											<Button
+												size="small"
+												variant="outlined"
+												onClick={() => {
+													removeFromCart(item);
+												}}
+											>
+												Remove
+											</Button>
+										</TableCell>
+									</TableRow>
+								))}
+								<TableRow>
+									<TableCell colSpan={2} align="right">
+										Total: ${total}
 									</TableCell>
 								</TableRow>
-							))}
-							<TableRow>
-								<TableCell colSpan={2} align="right">
-									Total: ${total}
-								</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
-				</TableContainer>
-
-				<Button
-					size="large"
-					variant="contained"
-					color="secondary"
-					onClick={() => {
-						history.push("/login");
-					}}
-				>
-					PROCEED TO CHECKOUT
-				</Button>
-			</div>
-		</React.Fragment>
+							</TableBody>
+						</Table>
+					</TableContainer>
+					<Button
+						size="large"
+						variant="contained"
+						color="secondary"
+						onClick={() => {
+							history.push("/login");
+						}}
+					>
+						PROCEED TO CHECKOUT
+					</Button>
+				</div>
+			)}
+		</div>
 	);
 };
 
