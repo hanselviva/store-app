@@ -20,9 +20,10 @@ export const fetchItems = () => (dispatch) => {
 	dispatch({
 		type: START_FETCHING,
 	});
-	axios
-		// .get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=90&exact=0")
-		.get("https://www.freetogame.com/api/games")
+	axios // // .get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=90&exact=0")
+		.get(
+			"https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games",
+		)
 		.then((res) =>
 			dispatch({
 				type: ITEMS_FETCHED,
