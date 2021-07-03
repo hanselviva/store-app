@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions";
-import { useHistory } from "react-router-dom";
-import Popup from "./Popup";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -62,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
 		"& > *": {
 			marginTop: theme.spacing(2),
 		},
+	},
+	dialog: {
+		maxWidth: "sm",
 	},
 }));
 
@@ -126,13 +127,11 @@ const Store = (props) => {
 									<Typography>
 										<b>Rent Price: ${card.rent}</b>
 										<br />
-										<b>Genre:</b> {card.genre} <br />
 										<b>Platform: </b> {card.platform} <br />
 										<b>Description:</b> {card.short_description}
 									</Typography>
 								</CardContent>
 								<CardActions>
-									{/* <a href={card.game_url} target="_blank" rel="noreferrer"> */}
 									<Button
 										className={classes.cardButton}
 										size="small"
@@ -143,7 +142,6 @@ const Store = (props) => {
 									>
 										Details
 									</Button>
-									{/* </a> */}
 
 									{cart.includes(card) ? (
 										<Button
@@ -177,6 +175,8 @@ const Store = (props) => {
 				</Grid>
 
 				<Dialog
+					className={classes.dialog}
+					fullWidth
 					open={openDialog}
 					onClose={() => {}}
 					aria-labelledby="alert-dialog-title"
@@ -184,8 +184,29 @@ const Store = (props) => {
 				>
 					<DialogTitle id="alert-dialog-title">{"Details"}</DialogTitle>
 					<DialogContent>
+						<img
+							alt="thumbnail"
+							src={gameDetails.thumbnail}
+							style={{ height: "250px" }}
+						/>
 						<DialogContentText id="alert-dialog-description">
-							{gameDetails.title}
+							<b>Title: </b>
+							{gameDetails.title} <br />
+							<b>Genre: </b>
+							{gameDetails.genre} <br />
+							<b>Platform: </b>
+							{gameDetails.platform} <br />
+							<b>Developer: </b>
+							{gameDetails.developer} <br />
+							<b>Publisher: </b>
+							{gameDetails.publisher} <br />
+							<b>Description: </b>
+							{gameDetails.short_description} <br />
+							<b>Release Date: </b>
+							{gameDetails.release_date} <br />
+							<a rel="noreferrer" target="_blank" href={gameDetails.game_url}>
+								Official Site
+							</a>
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
