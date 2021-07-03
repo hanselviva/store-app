@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions";
+import { useHistory } from "react-router-dom";
 
+import Pagination from "@material-ui/lab/Pagination";
 import {
 	Button,
 	Container,
@@ -53,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
 	typography: {
 		padding: theme.spacing(2),
 	},
+	pagination: {
+		"& > *": {
+			marginTop: theme.spacing(2),
+		},
+	},
 }));
 
 // MUI variable
@@ -62,6 +69,23 @@ const Store = (props) => {
 	const classes = useStyles();
 	// const history = useHistory();
 
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage] = useState(30);
+
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const calculateNoOfPages = () => {
+		const totalItems = items.length;
+		let arr = [];
+		for (let i = 1; i < Math.ceil(totalItems / itemsPerPage); i++) {
+			arr.push(i);
+		}
+		return arr;
+	};
+
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}, [cart]);
@@ -70,7 +94,7 @@ const Store = (props) => {
 		<div className="storeWrapper">
 			<Container className={classes.cardGrid} maxWidth="lg">
 				<Grid container spacing={2}>
-					{items.map((card) => (
+					{currentItems.map((card) => (
 						<Grid item key={card.id} md={3} className={classes.cardWrapper}>
 							<Card className={classes.card} variant="outlined">
 								<CardMedia
@@ -104,6 +128,7 @@ const Store = (props) => {
 											Details
 										</Button>
 									</a>
+
 									{cart.includes(card) ? (
 										<Button
 											className={classes.cardButtonRemove}
@@ -134,6 +159,19 @@ const Store = (props) => {
 						</Grid>
 					))}
 				</Grid>
+
+				<div className={classes.pagination}>
+					<Pagination
+						count={calculateNoOfPages().length}
+						page={currentPage}
+						defaultPage={1}
+						variant="outlined"
+						shape="rounded"
+						onChange={(e, value) => {
+							paginate(value);
+						}}
+					/>
+				</div>
 			</Container>
 		</div>
 	);
