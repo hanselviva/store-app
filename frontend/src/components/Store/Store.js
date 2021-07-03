@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions";
-import { useHistory } from "react-router-dom";
 
 import {
 	Button,
