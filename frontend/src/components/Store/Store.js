@@ -16,6 +16,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+	storeWrapper: {},
 	cardGrid: {
 		paddingTop: theme.spacing(4),
 		paddingBottom: theme.spacing(8),
@@ -60,20 +61,16 @@ const useStyles = makeStyles((theme) => ({
 const Store = (props) => {
 	const { cart, addToCart, removeFromCart, items } = props;
 	const classes = useStyles();
-	const history = useHistory();
+	// const history = useHistory();
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}, [cart]);
 
-	const viewDetails = (id) => {
-		history.push(`/store/:${id}`);
-	};
-
 	return (
 		<div className="storeWrapper">
 			<Container className={classes.cardGrid} maxWidth="lg">
-				<Grid container spacing={4}>
+				<Grid container spacing={2}>
 					{items.map((card) => (
 						<Grid item key={card.id} md={3} className={classes.cardWrapper}>
 							<Card className={classes.card} variant="outlined">
@@ -91,10 +88,7 @@ const Store = (props) => {
 										{card.title} <br />
 									</Typography>
 									<Typography>
-										<b>
-											Price to Rent: $
-											{Math.floor(Math.random() * (60 - 20 + 1)) + 20}
-										</b>
+										<b>Rent Price: ${card.rent}</b>
 										<br />
 										<b>Genre:</b> {card.genre} <br />
 										<b>Platform: </b> {card.platform} <br />
@@ -102,14 +96,15 @@ const Store = (props) => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button
-										className={classes.cardButton}
-										size="small"
-										variant="outlined"
-									>
-										View
-									</Button>
-
+									<a href={card.game_url} target="_blank" rel="noreferrer">
+										<Button
+											className={classes.cardButton}
+											size="small"
+											variant="outlined"
+										>
+											Details
+										</Button>
+									</a>
 									{cart.includes(card) ? (
 										<Button
 											className={classes.cardButtonRemove}
@@ -128,7 +123,7 @@ const Store = (props) => {
 											size="small"
 											variant="contained"
 											color="secondary"
-											onClick={() => {
+											onClick={(e) => {
 												addToCart(card);
 											}}
 										>

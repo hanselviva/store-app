@@ -47,10 +47,7 @@ const Cart = (props) => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const total = cart.reduce(
-		(accumulator, curr) => parseFloat(accumulator) + parseFloat(curr.cheapest),
-		0,
-	);
+	const total = cart.reduce((accumulator, curr) => accumulator + curr.rent, 0);
 
 	return (
 		<div className={classes.cartWrapper}>
@@ -85,19 +82,19 @@ const Cart = (props) => {
 							</TableHead>
 							<TableBody>
 								{cart.map((item) => (
-									<TableRow key={item.gameID}>
-										<TableCell>{item.gameID}</TableCell>
+									<TableRow key={item.id}>
+										<TableCell>{item.id}</TableCell>
 										<TableCell className={classes.gameTitleCol}>
 											<img
-												alt={item.external}
-												src={item.thumb}
+												alt={item.title}
+												src={item.thumbnail}
 												width="100px"
 												style={{ marginRight: "10px" }}
 											/>
-											{item.external}
+											{item.title}
 										</TableCell>
 
-										<TableCell align="right">${item.cheapest}</TableCell>
+										<TableCell align="right">$ {item.rent}</TableCell>
 										<TableCell align="right">
 											<Button
 												size="small"

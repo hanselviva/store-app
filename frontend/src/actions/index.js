@@ -12,6 +12,10 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const ITEMS_FETCHED = "ITEMS_FETCHED";
 export const REMOVE_FROM_CART = "REMOVE_FROM CART";
 
+const generatePrice = () => {
+	return Math.floor(Math.random() * (60 - 20 + 1)) + 20;
+};
+
 export const fetchItems = () => (dispatch) => {
 	dispatch({
 		type: START_FETCHING,
@@ -22,7 +26,10 @@ export const fetchItems = () => (dispatch) => {
 		.then((res) =>
 			dispatch({
 				type: ITEMS_FETCHED,
-				payload: res.data,
+				payload: res.data.map((data) => ({
+					...data,
+					rent: generatePrice(),
+				})),
 			}),
 		)
 		.catch((err) => console.log(err));
