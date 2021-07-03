@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions";
 import { useHistory } from "react-router-dom";
+import Popup from "./Popup";
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 import Pagination from "@material-ui/lab/Pagination";
 import {
@@ -26,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: theme.spacing(2),
 		textAlign: "left",
 	},
-
 	card: {
 		height: "100%",
 		display: "flex",
@@ -52,9 +58,6 @@ const useStyles = makeStyles((theme) => ({
 	cardContent: {
 		flexGrow: 1,
 	},
-	typography: {
-		padding: theme.spacing(2),
-	},
 	pagination: {
 		"& > *": {
 			marginTop: theme.spacing(2),
@@ -69,13 +72,22 @@ const Store = (props) => {
 	const classes = useStyles();
 	// const history = useHistory();
 
-	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(30);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [gameDetails, setGameDetails] = useState({});
+	const handleViewDetails = (game) => {
+		setOpenDialog(true);
+		setGameDetails(game);
+	};
+	const handleCloseDetails = () => {
+		setOpenDialog(false);
+	};
 
+	// Pagination vars
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage] = useState(32);
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 	const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
-
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 	const calculateNoOfPages = () => {
 		const totalItems = items.length;
@@ -85,13 +97,14 @@ const Store = (props) => {
 		}
 		return arr;
 	};
+	// --- end of pagination vars
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}, [cart]);
 
 	return (
-		<div className="storeWrapper">
+		<div className="storeWrapper" id="store">
 			<Container className={classes.cardGrid} maxWidth="lg">
 				<Grid container spacing={2}>
 					{currentItems.map((card) => (
@@ -119,15 +132,18 @@ const Store = (props) => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<a href={card.game_url} target="_blank" rel="noreferrer">
-										<Button
-											className={classes.cardButton}
-											size="small"
-											variant="outlined"
-										>
-											Details
-										</Button>
-									</a>
+									{/* <a href={card.game_url} target="_blank" rel="noreferrer"> */}
+									<Button
+										className={classes.cardButton}
+										size="small"
+										variant="outlined"
+										onClick={() => {
+											handleViewDetails(card);
+										}}
+									>
+										Details
+									</Button>
+									{/* </a> */}
 
 									{cart.includes(card) ? (
 										<Button
@@ -160,6 +176,25 @@ const Store = (props) => {
 					))}
 				</Grid>
 
+				<Dialog
+					open={openDialog}
+					onClose={() => {}}
+					aria-labelledby="alert-dialog-title"
+					aria-describedby="alert-dialog-description"
+				>
+					<DialogTitle id="alert-dialog-title">{"Details"}</DialogTitle>
+					<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							{gameDetails.title}
+						</DialogContentText>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleCloseDetails} color="primary" autoFocus>
+							Close
+						</Button>
+					</DialogActions>
+				</Dialog>
+
 				<div className={classes.pagination}>
 					<Pagination
 						count={calculateNoOfPages().length}
@@ -167,7 +202,12 @@ const Store = (props) => {
 						defaultPage={1}
 						variant="outlined"
 						shape="rounded"
+						color="primary"
+						size="large"
+						showFirstButton
+						showLastButton
 						onChange={(e, value) => {
+							window.location.href = "#store";
 							paginate(value);
 						}}
 					/>
