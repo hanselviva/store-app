@@ -210,7 +210,12 @@ const Store = (props) => {
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleCloseDetails} color="primary" autoFocus>
+						<Button
+							onClick={handleCloseDetails}
+							color="primary"
+							autoFocus
+							variant="contained"
+						>
 							Close
 						</Button>
 					</DialogActions>
@@ -220,7 +225,6 @@ const Store = (props) => {
 					<Pagination
 						count={calculateNoOfPages().length}
 						page={currentPage}
-						defaultPage={1}
 						variant="outlined"
 						shape="rounded"
 						color="primary"
