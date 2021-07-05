@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Carousel from "react-material-ui-carousel";
-import { Paper, Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
 const Item = (props) => {
 	return (
