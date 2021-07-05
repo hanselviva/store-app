@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import Store from "../Store/Store";
 import Banner from "./Banner";
+import CarouselComp from "./CarouselComp";
 
 //
 //
@@ -142,7 +143,10 @@ const Homepage = (props) => {
 						</Container>
 					</div>
 				</Grid>
-				<Grid item xs={false} sm={4} md={7} className={classes.image} />
+				{/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
+				<Grid item xs={false} sm={4} md={7}>
+					<CarouselComp />
+				</Grid>
 			</Grid>
 			<Banner />
 			<Store
