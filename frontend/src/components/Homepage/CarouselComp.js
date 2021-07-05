@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Carousel from "react-material-ui-carousel";
 
@@ -23,14 +23,8 @@ const Item = (props) => {
 	);
 };
 
-const CarouselComp = ({ items }) => {
-	const [newItems, setNewItems] = useState(items);
-
-	useEffect(() => {
-		const shuffle = items.sort(() => 0.5 - Math.random());
-		const arrForCarousel = shuffle.slice(0, 4);
-		setNewItems(arrForCarousel);
-	}, [items]);
+const CarouselComp = (props) => {
+	const { dataForCarousel } = props;
 
 	return (
 		<div
@@ -43,7 +37,7 @@ const CarouselComp = ({ items }) => {
 			}}
 		>
 			<Carousel>
-				{newItems.map((item, i) => (
+				{dataForCarousel.map((item, i) => (
 					<Item key={i} item={item} />
 				))}
 			</Carousel>
@@ -53,7 +47,7 @@ const CarouselComp = ({ items }) => {
 
 const mapStateToProps = (state) => ({
 	isLoading: state.isLoading,
-	items: state.items,
+	dataForCarousel: state.dataForCarousel,
 });
 
 export default connect(mapStateToProps, {})(CarouselComp);

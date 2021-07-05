@@ -2,6 +2,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import axios from "axios";
 
 export const START_FETCHING = "START_FETCHING";
+export const DATA_FOR_CAROUSEL = "DATA_FOR_CAROUSEL";
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const FETCHING_USER_SUCCESS = "FETCHING_USER_SUCCESS";
@@ -19,10 +20,22 @@ const generatePrice = () => {
 const options = {
 	method: "GET",
 	url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
+	params: { platform: "pc" },
 	headers: {
 		"x-rapidapi-key": "deab7fc526msh8a770823a240463p14a705jsn82b32902b654",
 		"x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",
 	},
+};
+
+// const options = {
+// 	method: "GET",
+// 	url: "https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games",
+// };
+
+const shufflingAnArray = (arr) => {
+	const shuffle = arr.sort(() => 0.5 - Math.random());
+	const arrForCarousel = shuffle.slice(0, 4);
+	return arrForCarousel;
 };
 
 export const fetchItems = () => (dispatch) => {
@@ -38,6 +51,15 @@ export const fetchItems = () => (dispatch) => {
 					...data,
 					rent: generatePrice(),
 				})),
+			}),
+		)
+		.catch((err) => console.log(err));
+	axios
+		.request(options)
+		.then((res) =>
+			dispatch({
+				type: DATA_FOR_CAROUSEL,
+				payload: shufflingAnArray(res.data),
 			}),
 		)
 		.catch((err) => console.log(err));

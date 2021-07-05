@@ -1,6 +1,7 @@
 import {
 	// ACTIONS
 	START_FETCHING,
+	DATA_FOR_CAROUSEL,
 	SIGNUP,
 	LOGIN,
 	FETCHING_USER_SUCCESS,
@@ -13,6 +14,7 @@ import {
 
 export const initialState = {
 	items: [],
+	dataForCarousel: [],
 	isLoading: false,
 	isLoggedIn: false,
 	user: null,
@@ -32,6 +34,12 @@ export const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				items: action.payload,
+			};
+		case DATA_FOR_CAROUSEL:
+			return {
+				...state,
+				isLoading: false,
+				dataForCarousel: action.payload,
 			};
 		case LOGIN:
 			return {

@@ -127,17 +127,6 @@ const Homepage = (props) => {
 											</Button>
 										</Link>
 									</Grid>
-									{/* <Grid item>
-										<Link href="/" style={{ textDecoration: "none" }}>
-											<Button
-												variant="contained"
-												color="primary"
-												className={classes.ctaButton}
-											>
-												Put Games for Rent
-											</Button>
-										</Link>
-									</Grid> */}
 								</Grid>
 							</div>
 						</Container>
@@ -149,11 +138,7 @@ const Homepage = (props) => {
 				</Grid>
 			</Grid>
 			<Banner />
-			<Store
-			// items={currentItems}
-			// itemsPerPage={itemsPerPage}
-			// totalItems={items.length}
-			/>
+			<Store />
 		</div>
 	);
 };
