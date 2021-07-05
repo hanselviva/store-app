@@ -5,7 +5,7 @@ import Dropdown from "./Dropdown";
 import { useHistory } from "react-router-dom";
 
 // MUI imports
-import VideogameAssetIcon from "@material-ui/icons/VideogameAsset";
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -58,7 +58,7 @@ const Header = (props) => {
 						return history.push("/");
 					}}
 				>
-					<VideogameAssetIcon className={classes.icon} />
+					<SportsEsportsIcon className={classes.icon} />
 					<Typography variant="h6" color="inherit" noWrap>
 						RENT-A-GAME
 					</Typography>

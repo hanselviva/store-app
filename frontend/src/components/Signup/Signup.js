@@ -1,4 +1,6 @@
 import React from "react";
+
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -21,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
 	},
 	form: {
 		width: "100%", // Fix IE 11 issue.
@@ -39,9 +40,11 @@ const Signup = () => {
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 			<div className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
-				</Avatar>
+				<SportsEsportsIcon
+					className={classes.avatar}
+					color="secondary"
+					style={{ fontSize: 60 }}
+				/>
 				<Typography component="h1" variant="h5">
 					Sign up
 				</Typography>
@@ -111,7 +114,7 @@ const Signup = () => {
 					</Button>
 					<Grid container justify="flex-end">
 						<Grid item>
-							<Link href="#" variant="body2">
+							<Link href="/login" variant="body2">
 								Already have an account? Sign in
 							</Link>
 						</Grid>
