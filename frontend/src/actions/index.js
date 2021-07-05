@@ -13,17 +13,24 @@ export const ITEMS_FETCHED = "ITEMS_FETCHED";
 export const REMOVE_FROM_CART = "REMOVE_FROM CART";
 
 const generatePrice = () => {
-	return Math.floor(Math.random() * (60 - 20 + 1)) + 20;
+	return Math.floor(Math.random() * (30 - 10 + 1)) + 10;
+};
+
+const options = {
+	method: "GET",
+	url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
+	headers: {
+		"x-rapidapi-key": "deab7fc526msh8a770823a240463p14a705jsn82b32902b654",
+		"x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",
+	},
 };
 
 export const fetchItems = () => (dispatch) => {
 	dispatch({
 		type: START_FETCHING,
 	});
-	axios // // .get("https://www.cheapshark.com/api/1.0/games?title=Game&limit=90&exact=0")
-		.get(
-			"https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games",
-		)
+	axios
+		.request(options)
 		.then((res) =>
 			dispatch({
 				type: ITEMS_FETCHED,
